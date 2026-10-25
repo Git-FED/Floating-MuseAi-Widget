@@ -33,7 +33,17 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() { super.onResume(); updateStatus() }
+    override fun onResume() {
+        super.onResume()
+        updateStatus()
+        startServiceIfAllowed()
+    }
+
+    private fun startServiceIfAllowed() {
+        if (Settings.canDrawOverlays(this)) {
+            ContextCompat.startForegroundService(this, Intent(this, FloatingButtonService::class.java))
+        }
+    }
 
     private fun requestNotifications() {
         if (Build.VERSION.SDK_INT >= 33 &&
