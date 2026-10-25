@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Floating Muse</string>
+    <string name="muse_chat_url">https://muse.ai/</string>
+    <string name="floating_button_description">Open Muse chat</string>
+    <string name="service_running">Floating button is active</string>
+    <string name="notification_channel_name">Floating Muse</string>
+    <string name="close">Close</string>
+    <string name="settings_title">Floating Muse setup</string>
+    <string name="grant_overlay">Grant overlay permission</string>
+    <string name="grant_notifications">Grant notification permission</string>
+    <string name="start_floating_button">Start floating button</string>
+    <string name="permission_status">Overlay: %1$s\nNotifications: %2$s</string>
+    <string name="settings_help">The overlay permission is required for the button to appear above other apps. For reliable background operation, set Floating Muse battery usage to Unrestricted in Android system settings.</string>
+</resources>

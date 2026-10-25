@@ -1,0 +1,6 @@
+name = "floating-muse-site"
+compatibility_date = "2026-10-25"
+pages_build_output_dir = "./site"
+
+# Direct Cloudflare Pages deployment from the repository root:
+# npx wrangler pages deploy site --project-name floating-muse-site
