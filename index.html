@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Floating Muse keeps Muse one tap away with a cheerful Android chat-head overlay.">
+  <meta name="theme-color" content="#6c4ab6">
+  <meta property="og:title" content="Floating Muse — Muse, wherever you are">
+  <meta property="og:description" content="A tiny purple chat head for quick Muse conversations over the app you are already using.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/promo-hero.png">
+  <title>Floating Muse — Muse, wherever you are</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Floating Muse home"><span class="brand-mark">✦</span><span>Floating Muse</span></a>
+    <a class="header-link" href="https://github.com/" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">A tiny chat head with big helpful energy</p>
+        <h1>Muse, wherever you are.</h1>
+        <p class="lede">Floating Muse puts a cheerful button on top of the app you are already using. Tap it, ask a question, and get back to your day without the app-switching shuffle.</p>
+        <div class="actions"><a class="button primary" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a><a class="button secondary" href="https://github.com/" rel="noreferrer">Get the APK build</a></div>
+        <p class="microcopy">Android overlay · private/direct distribution · no camera, contacts, or location access</p>
+      </div>
+      <div class="hero-art"><img src="assets/promo-hero.png" alt="Comic illustration of a purple floating chat mascot helping someone multitask beside a phone"></div>
+    </section>
+
+    <section class="strip section-wrap" id="how-it-works">
+      <div><span class="number">01</span><h2>Tap the button</h2><p>The round Muse button stays gently out of the way until you need it.</p></div>
+      <div><span class="number">02</span><h2>Chat in a mini window</h2><p>Ask Muse without opening the full app or losing your place.</p></div>
+      <div><span class="number">03</span><h2>Carry on</h2><p>Close the chat and get back to whatever delightful chaos was happening.</p></div>
+    </section>
+
+    <section class="promos section-wrap" id="promos">
+      <div class="promos-heading"><p class="eyebrow">A few good invites</p><h2>Bring a friend. Get a little extra.</h2><p>These referral offers are optional, but they are a fun way to try more human-agent tools together.</p></div>
+      <div class="promo-grid">
+        <article class="promo-card promo-muse"><span class="promo-label">Muse</span><h3>1 billion tokens for both of us.</h3><p>Join Muse, then redeem my code in Settings within 48 hours of joining.</p><div class="promo-code-row"><code>5F2V31</code><button class="copy-code" type="button" data-code="5F2V31">Copy code</button></div><a href="https://muse.ai/join" target="_blank" rel="noopener noreferrer">Join Muse <span aria-hidden="true">↗</span></a></article>
+        <article class="promo-card promo-manus"><span class="promo-label">Manus AI</span><h3>A little head start for your next agent.</h3><p>Use this invite code when you join Manus AI.</p><div class="promo-code-row"><code>G3ADN</code><button class="copy-code" type="button" data-code="G3ADN">Copy code</button></div></article>
+        <article class="promo-card promo-teamily"><span class="promo-label">Teamily</span><h3>Human-agent teamwork, unified.</h3><p>Redeem the code in Settings → Credits Center and get 5 CREDITS right away.</p><div class="promo-code-row"><code>2U6Q8D</code><button class="copy-code" type="button" data-code="2U6Q8D">Copy code</button></div><a href="https://teamily.ai/i/2U6Q8D" target="_blank" rel="noopener noreferrer">Join Teamily <span aria-hidden="true">↗</span></a></article>
+      </div>
+    </section>
+
+    <section class="feature section-wrap">
+      <div class="feature-art"><img src="assets/promo-overlay.png" alt="Comic illustration of a floating purple chat mascot helping an overwhelmed multitasker"></div>
+      <div class="feature-copy"><p class="eyebrow">The helpful kind of interruption</p><h2>Less app-hopping. More getting things done.</h2><p>Floating Muse is designed for quick questions, quick replies, and quick returns. Drag the button where you like it. The overlay avoids the status bar, navigation bar, lock screen, and permission dialogs.</p><div class="pill-row"><span>Draggable</span><span>WebView chat</span><span>Low fuss</span></div></div>
+    </section>
+
+    <section class="battery-card section-wrap">
+      <div><p class="eyebrow">A small footprint</p><h2>It does not need to be dramatic.</h2><p>The helper service uses a foreground notification and asks only for the permissions it needs: overlay, internet, boot restore, foreground service, and notifications on newer Android versions.</p></div>
+      <img src="assets/promo-battery.png" alt="Comic illustration of a purple mascot sleeping peacefully beside a full battery gauge">
+    </section>
+
+    <section class="email-list section-wrap" id="email-list">
+      <div class="email-list-copy"><p class="eyebrow">Stay in the loop</p><h2>Get the good stuff before it floats away.</h2><p>Join the email list for Floating Muse updates, early access, and occasional notes from the FEDPromptly ecosystem.</p><button class="email-list-button" id="openEmailList" type="button"><span class="email-status-dot"></span><strong>Join email list</strong><span class="email-list-hint">Updates, launches, and useful mischief</span><span aria-hidden="true">↗</span></button></div>
+    </section>
+
+    <section class="community section-wrap" id="community">
+      <div class="community-copy">
+        <p class="eyebrow">Come say hi</p>
+        <h2>Ask questions. Share wins. Find the other weirdos.</h2>
+        <p>Join the Floating Muse Discord community for project updates, support, and the occasional excellent idea that starts with “what if the button…”</p>
+        <a class="button primary" href="https://discord.com/widget?id=1400235929154879490&amp;theme=dark" target="_blank" rel="noopener noreferrer">Open Discord <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="discord-frame">
+        <iframe src="https://discord.com/widget?id=1400235929154879490&amp;theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" title="Floating Muse Discord community"></iframe>
+      </div>
+    </section>
+
+    <section class="support-card section-wrap" id="subscribe">
+      <div><p class="eyebrow">Keep the little button floating</p><h2>Support the build.</h2><p>If Floating Muse is useful to you, a $5 Patreon subscription helps keep the project moving and the servers humming.</p></div>
+      <a class="button light" href="https://www.patreon.com/checkout/16145898/28759937?client_id=yieuxJary8ZL-f8_KU2x6CLgr8nrI8W61ttU1yzFIpPl4KhhtqsjGDWTKdh0e-gx&amp;state=05d4a8d93af762ab4aa99e75678389c6&amp;response_type=code&amp;amt=5.0&amp;pledge_insufficient=True&amp;redirect_uri=https%3A%2F%2Fwww.patreon.com%2Foauth2%2Fbecome-patron%3Fredirect_uri%3Dhttps%253A%252F%252Fgithub.com%252Fsponsors%252Faccounts%252Fpatreon%26client_id%3DyieuxJary8ZL-f8_KU2x6CLgr8nrI8W61ttU1yzFIpPl4KhhtqsjGDWTKdh0e-gx%26min_cents%3D500%26campaign_id%3D16145898%26response_type%3Dcode%26state%3D05d4a8d93af762ab4aa99e75678389c6%26scope%3Didentity%2Bidentity%255Bemail%255D%2Bcampaigns%2Bw%253Acampaigns.webhook%2Bcampaigns.members&amp;start_flow=become_patron&amp;scope=identity+identity%5Bemail%5D+campaigns+w%3Acampaigns.webhook+campaigns.members" target="_blank" rel="noopener noreferrer">Subscribe on Patreon <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="cta section-wrap"><div><p class="eyebrow">Ready when you are</p><h2>Give your screen a little Muse.</h2></div><a class="button light" href="https://github.com/" rel="noreferrer">Open the project <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="site-footer section-wrap"><span>© 2026 Floating Muse</span><span>Built for GitHub Pages + Cloudflare</span></footer>
+
+  <div class="email-modal" id="emailModal" aria-hidden="true">
+    <div class="email-modal-card" role="dialog" aria-modal="true" aria-labelledby="emailModalTitle">
+      <button class="email-modal-close" id="closeEmailModal" type="button" aria-label="Close email list dialog">&times;</button>
+      <div id="emailAuthView">
+        <p class="eyebrow">FEDPromptly updates</p><h2 id="emailModalTitle">Join email list</h2><p class="modal-sub" id="emailModalSub">Stay updated with Floating Muse.</p>
+        <form id="emailAuthForm" autocomplete="off">
+          <label for="emailAddress">Email address</label><input id="emailAddress" type="email" placeholder="you@example.com" required>
+          <label for="emailPassword">Password</label><input id="emailPassword" type="password" placeholder="At least 6 characters" minlength="6" required>
+          <button class="button primary modal-submit" id="emailSubmit" type="submit">Join email list</button>
+          <div class="email-message" id="emailMessage" role="status"></div>
+          <div class="email-modal-toggle"><span id="emailToggleText">Already joined?</span> <button id="toggleEmailMode" type="button">Sign in</button></div>
+        </form>
+      </div>
+      <div class="email-logged-in" id="emailLoggedIn" hidden>
+        <div class="email-avatar" id="emailAvatar"></div><h2 id="emailName"></h2><p id="emailUserAddress"></p>
+        <p>Thanks for joining the email list. Keep an eye on your inbox for the next update.</p><button class="button secondary" id="emailLogout" type="button">Sign out</button>
+      </div>
+    </div>
+  </div>
+  <script src="email-list.js"></script>
+  <script src="promo-codes.js"></script>
+</body>
+</html>
