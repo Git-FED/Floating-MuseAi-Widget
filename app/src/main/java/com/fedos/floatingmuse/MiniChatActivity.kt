@@ -1,6 +1,7 @@
 package com.fedos.floatingmuse
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
@@ -8,6 +9,11 @@ class MiniChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mini_chat)
+
+        window.setGravity(Gravity.CENTER)
+        val metrics = resources.displayMetrics
+        window.setLayout((metrics.widthPixels * 0.92f).toInt(), (metrics.heightPixels * 0.85f).toInt())
+
         findViewById<View>(R.id.close_button).setOnClickListener { finish() }
         findViewById<ChatWebView>(R.id.chat_web_view).loadUrl(getString(R.string.muse_chat_url))
     }

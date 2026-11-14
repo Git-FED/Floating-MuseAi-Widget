@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
             <solid android:color="@color/muse_purple" />
             <stroke android:width="2dp" android:color="@color/muse_lilac" />
-            <padding android:left="10dp" android:top="10dp" android:right="10dp" android:bottom="10dp" />
         </shape>
     </item>
-</selector>
+    <item
+        android:left="16dp"
+        android:top="16dp"
+        android:right="16dp"
+        android:bottom="16dp"
+        android:drawable="@drawable/ic_muse" />
+</layer-list>

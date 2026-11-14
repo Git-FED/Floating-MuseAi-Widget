@@ -11,10 +11,13 @@ import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
 import android.view.Gravity
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import kotlin.math.abs
 
@@ -25,6 +28,8 @@ class FloatingButtonService : Service() {
     private var initialY = 0
     private var touchX = 0f
     private var touchY = 0f
+    private var moved = false
+    private lateinit var gestureDetector: GestureDetector
 
     override fun onCreate() {
         super.onCreate()
@@ -37,9 +42,45 @@ class FloatingButtonService : Service() {
         if (button != null) return
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         val image = ImageView(this).apply {
-            setImageResource(com.fedos.floatingmuse.R.drawable.muse_button)
-            contentDescription = getString(com.fedos.floatingmuse.R.string.floating_button_description)
-            setOnTouchListener(::handleTouch)
+            setImageResource(R.drawable.muse_button)
+            contentDescription = getString(R.string.floating_button_description)
+        }
+        val touchSlop = ViewConfiguration.get(this).scaledTouchSlop
+        gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDown(event: MotionEvent): Boolean = true
+
+            override fun onSingleTapConfirmed(event: MotionEvent): Boolean {
+                if (!moved) openChat()
+                return true
+            }
+        })
+        image.setOnTouchListener { view, event ->
+            gestureDetector.onTouchEvent(event)
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    val params = view.layoutParams as WindowManager.LayoutParams
+                    initialX = params.x
+                    initialY = params.y
+                    touchX = event.rawX
+                    touchY = event.rawY
+                    moved = false
+                    true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val dx = event.rawX - touchX
+                    val dy = event.rawY - touchY
+                    if (!moved && (abs(dx) > touchSlop || abs(dy) > touchSlop)) moved = true
+                    if (moved) {
+                        val params = view.layoutParams as WindowManager.LayoutParams
+                        params.x = initialX + dx.toInt()
+                        params.y = (initialY + dy.toInt()).coerceAtLeast(dp(8))
+                        windowManager.updateViewLayout(view, params)
+                    }
+                    true
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> true
+                else -> false
+            }
         }
         button = image
         val params = WindowManager.LayoutParams(
@@ -57,29 +98,21 @@ class FloatingButtonService : Service() {
         windowManager.addView(image, params)
     }
 
-    private fun handleTouch(view: View, event: MotionEvent): Boolean {
-        val params = view.layoutParams as WindowManager.LayoutParams
-        return when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                initialX = params.x
-                initialY = params.y
-                touchX = event.rawX
-                touchY = event.rawY
-                true
-            }
-            MotionEvent.ACTION_MOVE -> {
-                params.x = initialX + (event.rawX - touchX).toInt()
-                params.y = initialY + (event.rawY - touchY).toInt()
-                params.y = params.y.coerceAtLeast(dp(8))
-                windowManager.updateViewLayout(view, params)
-                true
-            }
-            MotionEvent.ACTION_UP -> {
-                val moved = abs(event.rawX - touchX) > dp(8) || abs(event.rawY - touchY) > dp(8)
-                if (!moved) startActivity(Intent(this, MiniChatActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-                true
-            }
-            else -> false
+    private fun openChat() {
+        Toast.makeText(this, "Opening Muse...", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MiniChatActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            1,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        try {
+            pendingIntent.send()
+        } catch (_: PendingIntent.CanceledException) {
+            startActivity(intent)
         }
     }
 
@@ -89,9 +122,9 @@ class FloatingButtonService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(com.fedos.floatingmuse.R.drawable.ic_stat_muse)
-            .setContentTitle(getString(com.fedos.floatingmuse.R.string.app_name))
-            .setContentText(getString(com.fedos.floatingmuse.R.string.service_running))
+            .setSmallIcon(R.drawable.ic_stat_muse)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(getString(R.string.service_running))
             .setContentIntent(open)
             .setOngoing(true)
             .setSilent(true)
@@ -101,7 +134,11 @@ class FloatingButtonService : Service() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             getSystemService(NotificationManager::class.java).createNotificationChannel(
-                NotificationChannel(CHANNEL_ID, getString(com.fedos.floatingmuse.R.string.notification_channel_name), NotificationManager.IMPORTANCE_LOW)
+                NotificationChannel(
+                    CHANNEL_ID,
+                    getString(R.string.notification_channel_name),
+                    NotificationManager.IMPORTANCE_LOW
+                )
             )
         }
     }
