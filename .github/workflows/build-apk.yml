@@ -12,6 +12,15 @@ concurrency:
   group: build-apk-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  # Gradle 8.9 pairs with Android Gradle Plugin 8.7.x.
+  # Change this if your project uses a different AGP version.
+  GRADLE_VERSION: "8.9"
+
+  # Change to "android", for example, if your Android project
+  # is inside an android/ subdirectory.
+  PROJECT_DIR: "."
+
 jobs:
   build:
     name: Build debug APK
@@ -35,39 +44,75 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          # Do not request the removed "tools" package.
           packages: "platform-tools"
 
-      - name: Verify Gradle Wrapper
-        run: |
-          for file in \
-            gradlew \
-            gradle/wrapper/gradle-wrapper.jar \
-            gradle/wrapper/gradle-wrapper.properties
-          do
-            if [[ ! -f "$file" ]]; then
-              echo "::error::Missing $file. Commit the complete Gradle Wrapper to the repository."
-              exit 1
-            fi
-          done
-
-          chmod +x gradlew
-
-      - name: Set up Gradle
+      - name: Install Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: ${{ env.GRADLE_VERSION }}
+
+      - name: Verify Android project location
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          if [[ ! -f settings.gradle && ! -f settings.gradle.kts ]]; then
+            echo "::error::No settings.gradle or settings.gradle.kts found in PROJECT_DIR."
+            echo "Set PROJECT_DIR to the directory containing your Android project."
+            echo "Gradle settings files found in the checkout:"
+            find "$GITHUB_WORKSPACE" -maxdepth 5 -type f \
+              \( -name settings.gradle -o -name settings.gradle.kts \) \
+              -not -path '*/.git/*' \
+              -not -path '*/node_modules/*'
+            exit 1
+          fi
 
       - name: Show build environment
+        working-directory: ${{ env.PROJECT_DIR }}
         run: |
           java -version
-          ./gradlew --version
+          gradle --version
 
       - name: Build debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
 
-      - name: Upload debug APK
+      - name: Collect debug APKs
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          output_dir="$RUNNER_TEMP/floating-muse-debug-apks"
+          mkdir -p "$output_dir"
+
+          if [[ ! -d app/build/outputs/apk ]]; then
+            echo "::error::APK output directory was not created."
+            exit 1
+          fi
+
+          count=0
+
+          while IFS= read -r -d '' apk; do
+            relative_path="${apk#app/build/outputs/apk/}"
+            destination="$output_dir/$relative_path"
+
+            mkdir -p "$(dirname "$destination")"
+            cp "$apk" "$destination"
+
+            echo "Collected: $apk"
+            count=$((count + 1))
+          done < <(
+            find app/build/outputs/apk \
+              -type f \
+              -path '*/debug/*.apk' \
+              -print0
+          )
+
+          if [[ "$count" -eq 0 ]]; then
+            echo "::error::Build completed but no debug APKs were found."
+            exit 1
+          fi
+
+      - name: Upload debug APKs
         uses: actions/upload-artifact@v4
         with:
           name: floating-muse-debug-apk
-          path: app/build/outputs/apk/**/debug/*.apk
+          path: ${{ runner.temp }}/floating-muse-debug-apks/
           if-no-files-found: error
           retention-days: 14
