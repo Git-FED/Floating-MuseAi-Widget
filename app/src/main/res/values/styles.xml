@@ -2,12 +2,16 @@
 <resources>
     <style name="Theme.FloatingMuse" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <item name="android:colorAccent">@color/muse_purple</item>
+        <item name="android:colorAccent">@color/muse_blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/muse_blue_dark</item>
     </style>
 
     <style name="Theme.FloatingMuse.Dialog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/muse_white</item>
+        <item name="android:colorAccent">@color/muse_blue</item>
     </style>
 </resources>

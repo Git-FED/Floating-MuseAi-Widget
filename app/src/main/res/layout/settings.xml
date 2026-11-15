@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/muse_blue">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,33 +12,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textColor="@color/muse_white" />
         <TextView
             android:id="@+id/status_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:textColor="@color/muse_white" />
         <Button
             android:id="@+id/overlay_permission_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/grant_overlay" />
+            android:text="@string/grant_overlay"
+            android:backgroundTint="@color/muse_white"
+            android:textColor="@color/muse_black" />
         <Button
             android:id="@+id/notification_permission_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/grant_notifications" />
+            android:text="@string/grant_notifications"
+            android:backgroundTint="@color/muse_white"
+            android:textColor="@color/muse_black" />
         <Button
             android:id="@+id/start_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/start_floating_button" />
+            android:text="@string/start_floating_button"
+            android:backgroundTint="@color/muse_white"
+            android:textColor="@color/muse_black" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/settings_help" />
+            android:text="@string/settings_help"
+            android:textColor="@color/muse_white" />
     </LinearLayout>
 </ScrollView>

@@ -3,6 +3,7 @@ package com.fedos.floatingmuse
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
 class MiniChatActivity : AppCompatActivity() {
@@ -11,6 +12,8 @@ class MiniChatActivity : AppCompatActivity() {
         setContentView(R.layout.mini_chat)
 
         window.setGravity(Gravity.CENTER)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        window.attributes = window.attributes.apply { dimAmount = 0.55f }
         val metrics = resources.displayMetrics
         window.setLayout((metrics.widthPixels * 0.92f).toInt(), (metrics.heightPixels * 0.85f).toInt())
 

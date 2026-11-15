@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="muse_purple">#6C4AB6</color>
-    <color name="muse_lilac">#BFA7F2</color>
+    <color name="muse_blue">#1976D2</color>
+    <color name="muse_blue_dark">#0D47A1</color>
+    <color name="muse_purple">#1976D2</color>
+    <color name="muse_lilac">#90CAF9</color>
+    <color name="muse_white">#FFFFFFFF</color>
+    <color name="muse_black">#FF000000</color>
 </resources>

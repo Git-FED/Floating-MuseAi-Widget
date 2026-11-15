@@ -101,7 +101,7 @@ class FloatingButtonService : Service() {
     private fun openChat() {
         Toast.makeText(this, "Opening Muse...", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, MiniChatActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
         val pendingIntent = PendingIntent.getActivity(
             this,
