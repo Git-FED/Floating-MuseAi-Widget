@@ -1,8 +1,12 @@
 # Floating Muse
 
+<img width="1282" height="693" alt="Screenshot 2026-11-14 193142" src="https://github.com/user-attachments/assets/ae383527-98d3-4b27-877c-68aad216b25a" />
+
 A small Android chat-head overlay that keeps Muse one tap away, plus a static landing page for sharing the project and its community links.
 
 > **Status:** The static site runs locally and is ready for GitHub Pages or Cloudflare Pages. The Android app is source-only in this repository; no APK or live public demo is committed yet.
+
+<img width="1284" height="696" alt="Screenshot 2026-11-14 193211" src="https://github.com/user-attachments/assets/82a381b9-b4f4-49cc-b880-8656c04a2ba4" />
 
 ## Why this exists
 
@@ -11,6 +15,8 @@ Switching away from the app you are currently using just to ask one quick questi
 Floating Muse is designed for that narrow moment: a draggable round button sits above the current app, and tapping it opens a compact WebView chat window. The Android helper is intentionally small and asks only for the permissions it needs to display the overlay, keep its foreground service alive, use the network, restore after boot, and show its notification.
 
 This repository also contains the public-facing site in [`site/`](site/). It explains the idea, shows the referral promotions, embeds the Discord community, provides the email-list modal, and links to the supplied Patreon flow.
+
+<img width="1282" height="690" alt="Screenshot 2026-11-14 193133" src="https://github.com/user-attachments/assets/ac18d5df-7b11-4357-a7bb-42f5b08ee8d7" />
 
 ## See it work
 
