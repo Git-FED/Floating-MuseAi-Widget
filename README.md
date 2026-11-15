@@ -152,6 +152,10 @@ The static page still contains placeholder `https://github.com/` links for the r
 
 Small improvements are easiest to review when they stay focused: update the static site under `site/`, Android behavior under `app/`, and the relevant workflow or deployment file when build behavior changes. Please include a reproducible local command in the pull request description.
 
+
+https://github.com/user-attachments/assets/7a3a6bd0-0bce-4b59-bd72-7c67c3d50aa6
+
+
 ## License
 
 No license file is present in this repository, so the project currently has no declared open-source license.
